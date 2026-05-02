@@ -13,8 +13,11 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <header class="sidebar-header">
-                <div class="profile-pic">
-                    <img src="01.jpg" alt="Shakibul Hasan Sohag">
+                <div class="header-left">
+                    <div class="profile-pic" id="sidebarProfilePic" style="cursor: pointer;">
+                        <img src="01.jpg" alt="Shakibul Hasan Sohag">
+                    </div>
+                    <span class="profile-name">SHAKIBUL</span>
                 </div>
                 <div class="header-icons">
                     <i data-lucide="users-2"></i>
@@ -27,12 +30,25 @@
             <div class="search-container">
                 <div class="search-bar">
                     <i data-lucide="search" style="width: 18px; height: 18px; color: var(--text-secondary);"></i>
-                    <input type="text" placeholder="Search or start new chat">
+                    <input type="text" id="searchInput" placeholder="Search or start new chat">
                 </div>
             </div>
 
             <div class="chat-list" id="chatList">
-                <div class="chat-item active" data-chat="about">
+                <div class="chat-item" data-chat="terminal">
+                    <div class="profile-pic">
+                        <div style="background: #1e1e1e; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="terminal" style="color: #00ff00;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Terminal Bot</span>
+                        </div>
+                        <div class="chat-last-msg">Type 'help' to start...</div>
+                    </div>
+                </div>
+                <div class="chat-item" data-chat="about">
                     <div class="profile-pic">
                         <div style="background: var(--accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                             <i data-lucide="user" style="color: white;"></i>
@@ -41,7 +57,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">About Me</span>
-                            <span class="chat-time">10:58 AM</span>
                         </div>
                         <div class="chat-last-msg">Hi! I'm Shakibul Hasan Sohag...</div>
                     </div>
@@ -56,7 +71,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">Technical Skills</span>
-                            <span class="chat-time">Yesterday</span>
                         </div>
                         <div class="chat-last-msg">Check out my tech stack!</div>
                     </div>
@@ -71,7 +85,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">Work Experience</span>
-                            <span class="chat-time">Tuesday</span>
                         </div>
                         <div class="chat-last-msg">IT Professional & ERP Specialist</div>
                     </div>
@@ -86,7 +99,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">Projects</span>
-                            <span class="chat-time">Monday</span>
                         </div>
                         <div class="chat-last-msg">View my latest work...</div>
                     </div>
@@ -101,7 +113,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">Education</span>
-                            <span class="chat-time">12/05/23</span>
                         </div>
                         <div class="chat-last-msg">Academic background...</div>
                     </div>
@@ -116,7 +127,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">Personal Info</span>
-                            <span class="chat-time">10:45 AM</span>
                         </div>
                         <div class="chat-last-msg">Personal details & address...</div>
                     </div>
@@ -131,7 +141,6 @@
                     <div class="chat-item-info">
                         <div class="chat-item-header">
                             <span class="chat-name">Contact Me</span>
-                            <span class="chat-time">Just now</span>
                         </div>
                         <div class="chat-last-msg">Let's get in touch!</div>
                     </div>
@@ -141,7 +150,23 @@
 
         <!-- Main Chat Area -->
         <main class="main-chat">
-            <header class="chat-header">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <div class="welcome-logo">
+                        <i data-lucide="message-square" style="width: 80px; height: 80px; color: var(--text-secondary);"></i>
+                    </div>
+                    <h1>Portfolio</h1>
+                    <p>Send and receive messages without keeping your phone online.</p>
+                    <div class="welcome-footer">
+                        <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
+                        <span>End-to-end encrypted</span>
+                    </div>
+                </div>
+            </div>
+
+            <header class="chat-header" style="display: none;">
+                <i data-lucide="chevron-left" class="back-btn" id="backBtn"></i>
                 <div class="profile-pic" id="headerProfilePic">
                     <div style="background: var(--accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                         <i data-lucide="user" style="color: white; width: 24px; height: 24px;"></i>
@@ -152,24 +177,66 @@
                     <div class="current-chat-status" id="chatStatus">online</div>
                 </div>
                 <div class="header-icons">
-                    <i data-lucide="search"></i>
                     <i data-lucide="more-vertical"></i>
                 </div>
             </header>
 
-            <div class="messages-container" id="messagesContainer">
+            <div class="messages-container" id="messagesContainer" style="display: none;">
                 <!-- Messages will be injected here -->
             </div>
 
-            <footer class="chat-footer">
+            <footer class="chat-footer" style="display: none;">
+                <i data-lucide="plus" class="footer-icon"></i>
                 <i data-lucide="smile" class="footer-icon"></i>
-                <i data-lucide="paperclip" class="footer-icon"></i>
                 <div class="input-container">
                     <input type="text" id="userInput" placeholder="Type a message">
                 </div>
-                <i data-lucide="mic" class="footer-icon" id="sendBtn"></i>
+                <button class="send-btn-circle" id="sendBtn">
+                    <i data-lucide="send-horizontal"></i>
+                </button>
             </footer>
         </main>
+    </div>
+
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="close-modal-btn" id="closeModal">
+                    <i data-lucide="x" class="close-icon"></i>
+                </div>
+                <span>Profile Info</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-profile-pic">
+                    <img src="01.jpg" alt="Shakibul Hasan Sohag">
+                </div>
+                <div class="modal-info">
+                    <h3>Shakibul Hasan Sohag</h3>
+                    <p class="modal-status">Student & IT Professional</p>
+                    <div class="info-item">
+                        <i data-lucide="info"></i>
+                        <div>
+                            <span>About</span>
+                            <p>Hardworking and flexible person with experience in different types of work.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="linkedin"></i>
+                        <div>
+                            <span>LinkedIn</span>
+                            <p><a href="https://www.linkedin.com/in/shakibul-hassan-861054290" target="_blank" style="color: var(--text-accent); text-decoration: none;">View Profile</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="phone"></i>
+                        <div>
+                            <span>Phone</span>
+                            <p>+8801873-441561</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
