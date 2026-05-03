@@ -432,10 +432,12 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Theme Toggle Logic (3-State Cycle: Dark -> Light -> Winter)
+// Theme Dropdown Logic
 const themeToggle = document.getElementById('themeToggle');
+const themeDropdownMenu = document.getElementById('themeDropdownMenu');
 const snowContainer = document.getElementById('snowContainer');
 let snowflakeInterval = null;
+let currentTheme = 'night'; // Default: Night
 
 function createSnowflake() {
     if (!document.body.classList.contains('winter-theme')) return;
@@ -446,44 +448,62 @@ function createSnowflake() {
     snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
     snowflake.style.opacity = Math.random();
     snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-    
     snowContainer.appendChild(snowflake);
-    
-    setTimeout(() => {
-        snowflake.remove();
-    }, 5000);
+    setTimeout(() => snowflake.remove(), 5000);
 }
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const body = document.body;
-        
-        if (body.classList.contains('light-theme')) {
-            // Switch to Winter
-            body.classList.remove('light-theme');
-            body.classList.add('winter-theme');
-            themeToggle.innerHTML = `<i data-lucide="snowflake"></i>`;
-            // Start Snowing
-            if (!snowflakeInterval) {
-                snowflakeInterval = setInterval(createSnowflake, 200);
-            }
-        } else if (body.classList.contains('winter-theme')) {
-            // Switch to Dark
-            body.classList.remove('winter-theme');
-            themeToggle.innerHTML = `<i data-lucide="moon"></i>`;
-            // Stop Snowing
-            clearInterval(snowflakeInterval);
-            snowflakeInterval = null;
-            snowContainer.innerHTML = '';
-        } else {
-            // Switch to Light
-            body.classList.add('light-theme');
-            themeToggle.innerHTML = `<i data-lucide="sun"></i>`;
-        }
-        
-        lucide.createIcons();
+function applyTheme(theme) {
+    const body = document.body;
+    body.classList.remove('light-theme', 'winter-theme');
+
+    // Clear snow
+    clearInterval(snowflakeInterval);
+    snowflakeInterval = null;
+    snowContainer.innerHTML = '';
+
+    if (theme === 'light') {
+        body.classList.add('light-theme');
+        themeToggle.innerHTML = `<i data-lucide="sun"></i>`;
+    } else if (theme === 'winter') {
+        body.classList.add('winter-theme');
+        themeToggle.innerHTML = `<i data-lucide="snowflake"></i>`;
+        snowflakeInterval = setInterval(createSnowflake, 200);
+    } else {
+        // night (default)
+        themeToggle.innerHTML = `<i data-lucide="moon"></i>`;
+    }
+
+    currentTheme = theme;
+
+    // Update active highlight in dropdown
+    document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.getAttribute('data-theme') === theme);
     });
+
+    lucide.createIcons();
 }
+
+// Toggle dropdown open/close
+themeToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    themeDropdownMenu.classList.toggle('open');
+});
+
+// Select a theme from dropdown
+themeDropdownMenu.addEventListener('click', (e) => {
+    const option = e.target.closest('.theme-option');
+    if (!option) return;
+    const theme = option.getAttribute('data-theme');
+    applyTheme(theme);
+    themeDropdownMenu.classList.remove('open');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#themeDropdownWrapper')) {
+        themeDropdownMenu.classList.remove('open');
+    }
+});
 
 // Language Translations
 const translations = {
@@ -632,4 +652,6 @@ langToggle.addEventListener('click', () => {
 window.onload = () => {
     lucide.createIcons();
     initProfileModal();
+    applyTheme('night'); // Default theme: Night
 };
+
