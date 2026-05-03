@@ -898,3 +898,60 @@ body:not(.light-theme):not(.winter-theme) #themeToggle i {
     font-size: 14px;
     line-height: 1.4;
 }
+
+/* Theme Dropdown */
+.theme-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.theme-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 44px;
+    right: 0;
+    background-color: var(--bg-header);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    z-index: 3000;
+    min-width: 150px;
+    padding: 6px 0;
+    animation: dropdownFade 0.15s ease-out;
+}
+
+@keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.theme-dropdown-menu.open {
+    display: block;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: background 0.15s;
+    border-radius: 4px;
+}
+
+.theme-option:hover {
+    background-color: var(--input-bg);
+}
+
+.theme-option.active {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.theme-option i {
+    width: 16px;
+    height: 16px;
+}
