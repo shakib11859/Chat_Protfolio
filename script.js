@@ -55,7 +55,7 @@ const chatDataEn = {
             { type: 'received', text: "3. **End-user Support**: Providing technical troubleshooting and application enhancements." }
         ]
     },
-    edu: {
+    education: {
         title: "Education",
         icon: "graduation-cap",
         iconBg: "#a450ff",
@@ -145,7 +145,7 @@ const chatDataBn = {
             { type: 'received', text: "৩. **এন্ড-ইউজার সাপোর্ট**: কারিগরি সমস্যা সমাধান এবং অ্যাপ্লিকেশন উন্নত করা।" }
         ]
     },
-    edu: {
+    education: {
         title: "শিক্ষা",
         icon: "graduation-cap",
         iconBg: "#a450ff",
@@ -518,7 +518,7 @@ const translations = {
         skills: "Technical Skills",
         experience: "Work Experience",
         projects: "Projects",
-        edu: "Education",
+        education: "Education",
         personal: "Personal Info",
         contact: "Contact Me",
         welcomeText: "You can learn about me using the terminal bot or directly in the private chat box.",
@@ -539,7 +539,7 @@ const translations = {
             skills: "Check out my tech stack!",
             experience: "IT Professional & ERP Specialist",
             projects: "View my latest work...",
-            edu: "Academic background...",
+            education: "Academic background...",
             personal: "Personal details & address...",
             contact: "Let's get in touch!"
         }
@@ -552,7 +552,7 @@ const translations = {
         skills: "টেকনিক্যাল স্কিলস",
         experience: "কাজের অভিজ্ঞতা",
         projects: "প্রজেক্টসমূহ",
-        edu: "শিক্ষা",
+        education: "শিক্ষা",
         personal: "ব্যক্তিগত তথ্য",
         contact: "যোগাযোগ",
         welcomeText: "আপনি টার্মিনাল বট ব্যবহার করে অথবা সরাসরি প্রাইভেট চ্যাট বক্সের মাধ্যমে আমার সম্পর্কে জানতে পারেন।",
@@ -573,7 +573,7 @@ const translations = {
             skills: "আমার টেক স্ট্যাক দেখুন!",
             experience: "আইটি প্রফেশনাল এবং ইআরপি বিশেষজ্ঞ",
             projects: "আমার সাম্প্রতিক কাজ দেখুন...",
-            edu: "শিক্ষাগত যোগ্যতা...",
+            education: "শিক্ষাগত যোগ্যতা...",
             personal: "ব্যক্তিগত তথ্য ও ঠিকানা...",
             contact: "যোগাযোগ করুন!"
         }
